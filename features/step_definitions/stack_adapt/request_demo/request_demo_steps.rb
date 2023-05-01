@@ -1,5 +1,4 @@
 When(/^I click on the (Request a Demo) button$/) do |button|
-  # Locate button element & click.
   element = @driver.find_element(:link_text, button)
   @driver.execute_script('arguments[0].click()', element)
 end
@@ -7,7 +6,7 @@ end
 When(/^I provide the following information for (request_demo) form:$/) do |_page, table|
   elements = []
 
-  # Locate form inputs and build array for full form clear.
+  # Locate form inputs and build array for form clear.
   elements << first_name = @driver.find_elements(:id, 'first_name').first
   elements << last_name = @driver.find_elements(:id, 'last_name').first
   elements << email = @driver.find_elements(:id, 'email').first
@@ -75,12 +74,10 @@ When(/^I provide the following information for (request_demo) form:$/) do |_page
 end
 
 When(/^I click the submit button$/) do
-  # Locate button element & click.
   @driver.find_element(:xpath, "//button[text()='Submit']").click
 end
 
 Then(/^(request_demo) form attributes will be in the following state:$/) do |page, table|
-  # Read mapped locators from yml.
   locators = YAML.load_file("config/stack_adapt/locators/#{page}/locators.yml")
 
   # table is a table.hashes.keys # => [:attribute, :feedback]
